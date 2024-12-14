@@ -1,0 +1,90 @@
+/**
+ * Definition for singly-linked list->
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* newNode = nullptr;
+        ListNode* newNodeTraverse = nullptr;
+        int currSum;
+        int carry = 0;
+            if (l1 != nullptr || l2 != nullptr)
+            {
+                currSum = l1->val + l2->val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                newNode = new ListNode(currSum);
+                newNodeTraverse = newNode;
+            }
+            else if(l1 != nullptr){
+                currSum = l1 -> val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                newNode = new ListNode(currSum);
+                newNodeTraverse = newNode;
+            }
+            else{
+                currSum = l2 -> val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                newNode = new ListNode(currSum);
+                newNodeTraverse = newNode;
+            }
+            newNodeTraverse = newNodeTraverse;
+            l1 = l1 -> next;
+            l2 = l2 -> next;
+
+        while(l1 != nullptr || l2 != nullptr){
+            if (l1 != nullptr && l2 != nullptr)
+            {
+                currSum = l1 -> val + l2 -> val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                ListNode* addNode = new ListNode(currSum);
+                newNodeTraverse -> next = addNode;
+                newNodeTraverse = newNodeTraverse -> next;
+            }
+            else if(l1 != nullptr){
+                currSum = l1 -> val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                ListNode* addNode = new ListNode(currSum);
+                newNodeTraverse -> next = addNode;
+                newNodeTraverse = newNodeTraverse -> next;
+            }
+            else{
+                currSum = l2 -> val + carry;
+                carry = currSum / 10;
+                currSum = currSum % 10;
+                ListNode* addNode = new ListNode(currSum);
+                newNodeTraverse -> next = addNode;
+                newNodeTraverse = newNodeTraverse -> next;
+            }
+
+            if(l1 != nullptr){
+                l1 = l1-> next;
+            }
+            if(l2 != nullptr){
+                l2 = l2-> next;
+            }
+            
+        }
+        if(carry == 1){
+            ListNode* nodeToAdd = new ListNode(1);
+            newNodeTraverse -> next = nodeToAdd;
+            newNodeTraverse = newNodeTraverse -> next;
+        }
+
+        return newNode;
+    }
+    // ListNode* addTwoNumbers(ListNode* l1, ListNode* l2, ListNode* sum, int carry){
+
+    // }
+};
