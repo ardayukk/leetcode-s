@@ -33,7 +33,6 @@ public:
             }
             TreeNode* hcpy = root;
             while(true){
-                cout << "c: " << c << "val: " << hcpy -> val << endl;
                 if(c == hcpy -> val){
                     return true;
                 }
