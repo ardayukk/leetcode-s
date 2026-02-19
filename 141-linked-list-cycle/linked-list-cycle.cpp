@@ -1,10 +1,14 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        for (int i = 0; i < 10010; i++) {
-            if (head == nullptr) return false;
-            head = head->next;
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;           // 1 step
+            fast = fast->next->next;     // 2 steps
+            if (slow == fast) return true;
         }
-        return true;
+        return false;
     }
 };
