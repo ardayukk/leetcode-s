@@ -9,9 +9,8 @@ public:
 
         while(r >= l){
             int mid = l + (r - l) / 2;
-            bool flag = isBadVersion(mid);
-
-            if(flag){
+            
+            if(isBadVersion(mid)){
                 r = mid -1;
             }
             else{
