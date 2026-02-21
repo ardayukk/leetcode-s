@@ -9,7 +9,7 @@ public:
     }
 
     bool isp(int x) {
-        int a = __builtin_popcount(x);
+        int a = count1s(x);
         if (a < 2) return false;
         for (int d = 2; d * d <= a; d++) {
             if (a % d == 0) return false;
