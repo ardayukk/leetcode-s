@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
-        sort(aliceSizes.begin(), aliceSizes.end());
         sort(bobSizes.begin(), bobSizes.end());
         int aliceSum = 0;
         for(int i: aliceSizes) aliceSum += i;
