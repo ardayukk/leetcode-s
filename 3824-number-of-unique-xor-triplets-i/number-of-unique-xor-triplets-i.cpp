@@ -4,7 +4,7 @@ public:
         int n = nums.size();
 
         if(n >= 3){
-            return pow(2, floor(log2(n) + 1)) ;
+            return pow(2, 32 - __builtin_clz(n)) ;
         }
 
         return n;
