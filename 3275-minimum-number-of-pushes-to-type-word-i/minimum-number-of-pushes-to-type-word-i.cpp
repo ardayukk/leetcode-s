@@ -3,7 +3,7 @@ public:
     int minimumPushes(string word) {
         vector<int> v(26,0);
         for(auto& c: word){
-            v[(c- 'a')]++;
+            v[static_cast<int>(c- 'a')]++;
         }
         sort(v.begin(), v.end());
 
