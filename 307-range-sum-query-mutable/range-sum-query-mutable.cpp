@@ -1,48 +1,50 @@
 class NumArray {
+private:
+    int n;
+    vector<long> tree;
+
 public:
     NumArray(vector<int>& nums) {
-        int n = nums.size();
-        this -> n = n;
+        n = nums.size();
+        tree.assign(n * 4, 0);
 
-        this -> nodes = vector<int>(n * 2);
-        
         for(int i = 0; i < n; i++){
-            nodes[i + n] = nums[i];
+            tree[n + i] = nums[i];
         }
-        for(int i = n - 1; i >= 1; i--){
-            nodes[i] = nodes[2 * i] +  nodes[2 * i + 1];
+        for(int i = n - 1; i > 0; i--){
+            tree[i] = tree[i << 1] + tree[(i << 1) + 1];
         }
     }
     
     void update(int index, int val) {
-        
-        int diff = val - nodes[index + n];
-        int track = index + n;
-        while(track != 0){
-            nodes[track] += diff;
-            track /= 2;
+        int prev = tree[n + index];
+        tree[n + index] = val;
+        int ind = n+index;
+        ind >>= 1;
+        while(ind > 0){
+            tree[ind] += (val - prev);
+            ind >>= 1;
         }
     }
     
     int sumRange(int left, int right) {
+        int sum = 0;
         left += n;
-        right += n;
-        int ans = 0;
-        while(left <= right){
-            if(left % 2 == 1)
-                ans += nodes[left++];
+        right += n + 1;
 
-            if(right % 2 == 0)
-                ans += nodes[right--];
+        while (left < right) {
+            if (left & 1)
+                sum += tree[left++];
+
+            if (right & 1)
+                sum += tree[--right];
 
             left /= 2;
             right /= 2;
         }
-        return ans;
+        return sum;
+
     }
-private:
-    int n;
-    vector<int> nodes;
 };
 
 /**
